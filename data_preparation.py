@@ -12,8 +12,6 @@ from sklearn.preprocessing import StandardScaler
 REQUESTS_PATH = "./data/requests.csv"
 CLUSTER_PATH = "./data/clusters.pkl"
 REQUESTS_PREPROCESSED_PATH = "./data/requests_t_stay.csv"
-CLUSTER = 2
-ARRIVAL_DATE = datetime.date(2023, 7, 28)
 
 
 def booking_attempts_t_res_to_t_stay(booking_attempts_df):
@@ -85,6 +83,7 @@ def import_data_preprocessed():
         REQUESTS_PREPROCESSED_PATH,
         parse_dates=["T_book", "T_stay", "T_book_day"],
         converters={"AvailableRoomRates": parse_dict, "SelectedRoomRates": parse_dict},
+        low_memory=False,
     )
 
     return df_t_stay
@@ -112,8 +111,8 @@ def logistic_fit(X, y):
     y_pred_test = logreg.predict_proba(X_test)[:, 1]
     y_pred_train = logreg.predict_proba(X_train)[:, 1]
 
-    print("residuals on train:", np.sum((y_train - y_pred_train) ** 2) / len(y_train))
-    print("residuals on test:", np.sum((y_test - y_pred_test) ** 2) / len(y_test))
+    # print("residuals on train:", np.sum((y_train - y_pred_train) ** 2) / len(y_train))
+    # print("residuals on test:", np.sum((y_test - y_pred_test) ** 2) / len(y_test))
 
     return logreg
 
@@ -179,36 +178,33 @@ def create_incremental_booking_curves(df_new_bkgs):
 
 
 def logistic_conversion_rate(df_t_stay):
+    # fit a logistic regression model for each cluster
     input_vars = ["ADR", "Advance"]
-    X = (
-        df_t_stay[df_t_stay.Cluster == CLUSTER][input_vars]
-        .reset_index(drop=True)
-        .values
-    )
-    y = (
-        df_t_stay[df_t_stay.Cluster == CLUSTER]["Accepted"]
-        .reset_index(drop=True)
-        .values
-    )
-    logreg = logistic_fit(X, y)
-    return logreg
+    logistic_models = {}
+    for cluster in np.unique(df_t_stay.Cluster):
+        X = (
+            df_t_stay[df_t_stay.Cluster == cluster][input_vars]
+            .reset_index(drop=True)
+            .values
+        )
+        y = (
+            df_t_stay[df_t_stay.Cluster == cluster]["Accepted"]
+            .reset_index(drop=True)
+            .values
+        )
+        logreg = logistic_fit(X, y)
+        logistic_models[cluster] = logreg
+    return logistic_models
 
 
-def get_model_and_visits():
-    # import pre-processed data
-    df_t_stay = import_data_preprocessed()
-
+def get_conversion_rate_model(df_t_stay):
     # fit the conversion rate model
-    logreg = logistic_conversion_rate(df_t_stay)
+    logreg_models = logistic_conversion_rate(df_t_stay)
 
-    # create visits_curve
-    df_visits = create_visits_curves(
-        df_t_stay[df_t_stay.T_stay.dt.date == ARRIVAL_DATE]
-    )
-    return logreg, df_visits
+    return logreg_models
 
 
-def get_reservations_from_model(ADR, logreg, df_visits):
+def get_reservations_from_model(ADR, logreg, df_visits, compset_cutoff):
     advance_vect = np.arange(1, 366)
 
     grid = np.zeros((365, 2))
@@ -218,62 +214,26 @@ def get_reservations_from_model(ADR, logreg, df_visits):
     CR = logreg.predict_proba(grid)[:, 1]
     CR = np.reshape(CR, (1, 365))
 
-    reservations = df_visits * CR
+    reservations = df_visits * CR * compset_cutoff
     reservations = np.flip(np.cumsum(np.flip(reservations), axis=1))
     reservations = np.clip(reservations, 0, 32)
     return advance_vect, reservations
+
+
+def clip_reservations(array_list, max_val=32):
+    for i in np.arange(array_list[0].shape[1] - 1, -1, -1):
+        reservations = [array[0, i] for array in array_list]
+        if np.sum(reservations) > max_val:
+            reservations_before_clip = [array[0, i + 1] for array in array_list]
+            for j, _ in enumerate(array_list):
+                array_list[j][0, : i + 1] = reservations_before_clip[j]
+            break
+
+    return array_list
 
 
 if __name__ == "__main__":
     # df_t_stay = import_data()
     # # export to csv
     # df_t_stay.to_csv("./data/requests_t_stay.csv", index=False)
-
-    logreg, df_visits = get_model_and_visits()
-
-    advance_vect, reservations = get_reservations_from_model(
-        ADR=100, logreg=logreg, df_visits=df_visits.values
-    )
-
-    import plotly.graph_objects as go
-
-    # # plot the reservations curve
-    # fig = go.Figure()
-    # fig.add_trace(
-    #     go.Scatter(x=advance_vect[75:], y=reservations[0, 75:], line=dict(width=4))
-    # )
-    # fig.add_trace(
-    #     go.Scatter(
-    #         x=advance_vect[:75],
-    #         y=reservations[0, :75],
-    #         line=dict(color="firebrick", width=4, dash="dash"),
-    #     )
-    # )
-    # fig.update_layout(
-    #     title="Reservations curve",
-    #     xaxis_title="Advance",
-    #     yaxis_title="Reservations",
-    #     font=dict(family="Courier New, monospace", size=18, color="RebeccaPurple"),
-    # )
-    # fig.update_yaxes(side="right", range=[0, 32])
-    # fig.update_xaxes(range=[200, 0])
-    # # take out legend
-    # fig.update_layout(showlegend=False)
-    fig_visits = go.Figure()
-    fig_visits.add_trace(
-        go.Scatter(
-            x=np.arange(1, 366),
-            y=np.flip(np.cumsum(np.flip(df_visits.values))),
-            line=dict(color="black", width=4),
-        )
-    )
-    fig_visits.update_layout(
-        title="Visits curve",
-        xaxis_title="Lead time",
-        yaxis_title="Cumulative visits",
-    )
-    fig_visits.update_yaxes(side="right")
-    fig_visits.update_xaxes(range=[200, 0])
-    # take out legend
-    fig_visits.update_layout(showlegend=False)
-    fig_visits.show()
+    df_t_stay = import_data_preprocessed()

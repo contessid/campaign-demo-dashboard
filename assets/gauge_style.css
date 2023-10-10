@@ -1,3 +1,114 @@
+body {
+    background-color: #dee2e6 !important;
+    font-family: "Source Sans"
+        /* background-color: #efefef !important; */
+}
+
+#react-entry-point>div>div.controllers.col {
+    background-color: #fff !important;
+    border-radius: 15px;
+    box-shadow: 9px 8px 5px -4px rgba(0, 0, 0, 0.1);
+}
+
+#react-entry-point>div>div:nth-child(3)>div:nth-child(1) {
+    /* background-color: #fff !important; */
+    margin-bottom: 5px;
+}
+
+#react-entry-point>div>div:nth-child(3)>div:nth-child(2) {
+    /* background-color: #fff !important; */
+    margin-bottom: 5px;
+}
+
+#react-entry-point>div>div:nth-child(3)>div:nth-child(3) {
+    background-color: #fff !important;
+    margin-bottom: 5px;
+}
+
+#react-entry-point>div>div:nth-child(3)>div:nth-child(4) {
+    background-color: #fff !important;
+    margin-bottom: 5px;
+}
+
+#plot1-visits>div.js-plotly-plot>div>div>svg:nth-child(1) {
+    background-color: #fff !important;
+    border-radius: 15px;
+    box-shadow: 9px 8px 5px -4px rgba(0, 0, 0, 0.1);
+}
+
+#plot1-visits>div.js-plotly-plot>div>div {
+    /* margin: 5px; */
+}
+
+#plot5-booking>div.js-plotly-plot>div>div {
+    margin: 5px;
+}
+
+#plot5-booking>div.js-plotly-plot>div>div>svg:nth-child(1) {
+    background-color: #fff !important;
+    border-radius: 15px;
+    box-shadow: 9px 8px 5px -4px rgba(0, 0, 0, 0.1);
+}
+
+#plot4-reservations>div.js-plotly-plot>div>div {
+    /* background-color: #fff !important; */
+    margin-left: 5px;
+}
+
+#plot4-reservations>div.js-plotly-plot>div>div>svg:nth-child(1) {
+    background-color: #fff !important;
+    border-radius: 15px;
+    box-shadow: 9px 8px 5px -4px rgba(0, 0, 0, 0.1);
+}
+
+
+#plot3-margin>div.js-plotly-plot>div>div {
+    /* background-color: #fff !important; */
+    /* margin: 5px; */
+}
+
+
+#plot3-margin>div.js-plotly-plot>div>div>svg:nth-child(1) {
+    background-color: #fff !important;
+    border-radius: 15px;
+    box-shadow: 9px 8px 5px -4px rgba(0, 0, 0, 0.1);
+}
+
+#plot2-CPC>div.js-plotly-plot>div>div {
+    /* background-color: #fff !important; */
+    /* margin: 5px; */
+}
+
+#plot2-CPC>div.js-plotly-plot>div>div>svg:nth-child(1) {
+    background-color: #fff !important;
+    border-radius: 15px;
+    box-shadow: 9px 8px 5px -4px rgba(0, 0, 0, 0.1);
+}
+
+#eff-commissions-gauge {
+    background-color: #fff !important;
+    margin: 5px;
+    margin-left: 10px;
+    border-radius: 15px;
+    box-shadow: 9px 8px 5px -4px rgba(0, 0, 0, 0.1);
+}
+
+#total-revenue {
+    background-color: #fff !important;
+    margin: 5px;
+    margin-left: 10px;
+    border-radius: 15px;
+    box-shadow: 9px 8px 5px -4px rgba(0, 0, 0, 0.1);
+}
+
+#total-margin {
+    background-color: #fff !important;
+    margin: 5px;
+    margin-left: 10px;
+    border-radius: 15px;
+    box-shadow: 9px 8px 5px -4px rgba(0, 0, 0, 0.1);
+}
+
 #eff-commissions-gauge>div>div>div>div {
     color: #000;
 }
@@ -6,3 +117,32 @@
     color: #000;
     font-size: 14px;
 }
+
+#t_stay>label:nth-child(1) {
+    margin-right: 50px;
+}
+
+#t_stay>label:nth-child(2) {
+    margin-right: 50px;
+}
+
+
+#ADR_slider {
+    padding: 30px !important;
+}
+
+#budget_slider {
+    padding: 30px !important;
+}
+
+#Ad_start {
+    padding: 30px !important;
+}
+
+#Booking_markup {
+    padding: 30px !important;
+}
+
+/* .row>* {
+    padding: 0px;
+} */
