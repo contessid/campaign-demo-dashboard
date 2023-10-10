@@ -15,6 +15,16 @@ body {
     src: url("/assets/fonts/sourcesans3-1.ttf") format("truetype");
 }
 
+/* COLORS */
+:root{
+    --blue-light: #008FD5;
+    --blue-mid: #034A7C;
+    --blue-dark: #012D51;
+    /* --blue-light: #008FD5;
+    --blue-mid: #008FD5;
+    --blue-dark: #008FD5; */
+}
+
 #react-entry-point>div>div.controllers.col-12 {
     background-color: #fff !important;
     border-radius: 15px;
@@ -107,8 +117,26 @@ body {
     margin-left: 10px;
     margin-bottom: 0px;
     margin-top: 5px;
-    font-size: 18px;
-    color: #034A7C;
+    font-size: 16px;
+    color: var(--blue-light);
+}
+
+.total-margin-title{
+    grid-area: 1/2;
+    margin-left: 10px;
+    margin-bottom: 0px;
+    margin-top: 5px;
+    font-size: 16px;
+    color: var(--blue-mid);
+}
+
+.eff-comm-title{
+    grid-area: 1/2;
+    margin-left: 10px;
+    margin-bottom: 0px;
+    margin-top: 5px;
+    font-size: 16px;
+    color: var(--blue-dark);
 }
 
 #total-revenue{
@@ -126,7 +154,7 @@ body {
     padding: 0;
     display: grid;
     position: relative;
-    grid-template-columns: 49px 163px;
+    grid-template-columns: 15px 163px;
 }
 
 .total-margin-box{
@@ -138,7 +166,7 @@ body {
     padding: 0;
     display: grid;
     position: relative;
-    grid-template-columns: 49px 163px;
+    grid-template-columns: 15px 163px;
 }
 
 .eff-comm-box{
@@ -150,8 +178,8 @@ body {
     padding: 0;
     display: grid;
     position: relative;
-    grid-template-columns: 49px 163px;
-    grid-template-rows: 50px 150px;
+    grid-template-columns: 15px 163px;
+    grid-template-rows: 16px 150px;
     height: auto;
 }
 
@@ -165,11 +193,37 @@ body {
     z-index: 99;
     border-bottom-left-radius: 10px;
     border-top-left-radius: 10px;
-    background-color: #034A7C;
+    background-color: var(--blue-light);
     position: relative;
     left: 0;
     grid-row: span 2;
     grid-column: 1;
+}
+
+.tab-margin-box{
+    height: 100%;
+    width: 100%;
+    z-index: 99;
+    border-bottom-left-radius: 10px;
+    border-top-left-radius: 10px;
+    background-color: var(--blue-mid);
+    position: relative;
+    left: 0;
+    grid-row: span 2;
+    grid-column: 1; 
+}
+
+.tab-comm-box{
+    height: 100%;
+    width: 100%;
+    z-index: 99;
+    border-bottom-left-radius: 10px;
+    border-top-left-radius: 10px;
+    background-color: var(--blue-dark);
+    position: relative;
+    left: 0;
+    grid-row: span 2;
+    grid-column: 1; 
 }
 
 #total-margin {
@@ -228,3 +282,37 @@ body {
 /* .row>* {
     padding: 0px;
 } */
+
+/* BREAKPOINTS FOR MACBOOK AIR FITTING */
+@media screen and (max-width: 1280px) {
+    .eff-comm-box svg {
+        margin-left: -15px;
+    }
+}
+
+@media screen and (max-width: 1199px) {
+    .total-revenue-title{
+        font-size: 13px;
+    }
+    .total-margin-title{
+        font-size: 13px;
+    }
+    .eff-comm-title{
+        font-size: 13px;
+    }
+    h2, h3, .h2, .h3 {
+    font-size: 13px;
+    }
+    .eff-comm-box svg {
+        margin-left: -28px;
+        scale: 0.9;
+    }
+    #eff-commissions-gauge>div>div>div>div {
+        margin-right: 30px;
+    }
+    #eff-commissions-gauge>div>div>div>label {
+        color: #000;
+        font-size: 14px;
+        margin-right: 30px;
+    }
+}

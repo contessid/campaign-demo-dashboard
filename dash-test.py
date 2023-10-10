@@ -35,6 +35,8 @@ TODAY_LEAD = 75
 BOOKING_MULTIPLIER = 1.25
 COMMISSION_COSTS = 0.18
 
+GAUGE_SIZE = 130
+
 # df = pd.read_csv("https://raw.githubusercontent.com/plotly/datasets/master/solar.csv")
 
 app = Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
@@ -248,16 +250,16 @@ app.layout = dbc.Container(
                                 ),
 
                                 html.Div([
-                                    html.Div(className="tab-revenue-box"),
-                                    html.H2("Expected Margin", className="total-revenue-title"),
+                                    html.Div(className="tab-margin-box"),
+                                    html.H2("Expected Margin", className="total-margin-title"),
                                     html.H2(id="total-margin"),
                                 ],
                                 className="total-margin-box",
                                 ),
                                 
                                 html.Div([
-                                    html.Div(className="tab-revenue-box"),
-                                    html.H2("Effective commissions", className="total-revenue-title"),
+                                    html.Div(className="tab-comm-box"),
+                                    html.H2("Effective commissions", className="eff-comm-title"),
                                     
                                     daq.Gauge(
                                     id="eff-commissions-gauge",
@@ -279,7 +281,7 @@ app.layout = dbc.Container(
                                     showCurrentValue=True,
                                     units="%",
                                     className="eff-gauge",
-                                    size=130,
+                                    size= GAUGE_SIZE,
                                 ),
                                 ],
                                 className="eff-comm-box",
