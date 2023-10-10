@@ -86,31 +86,83 @@ body {
 }
 
 #eff-commissions-gauge {
-    background-color: #fff !important;
     margin: 5px;
     margin-left: 10px;
     border-radius: 15px;
-    box-shadow: 9px 8px 5px -4px rgba(0, 0, 0, 0.1);
 }
 
-#total-revenue {
+.total-revenue-title{
+    grid-area: 1/2;
+    margin-left: 10px;
+    margin-bottom: 0px;
+    margin-top: 5px;
+    font-size: 18px;
+    color: #034A7C;
+}
+
+#total-revenue{
+    grid-area: 2/2;
+    margin-left: 10px;
+}
+
+.total-revenue-box{
     background-color: #fff !important;
     margin: 5px;
     margin-left: 10px;
-    border-radius: 15px;
+    border-radius: 10px;
     box-shadow: 9px 8px 5px -4px rgba(0, 0, 0, 0.1);
+    padding: 0;
+    display: grid;
+    position: relative;
+    grid-template-columns: 49px 163px;
+}
+
+.eff-comm-box{
+    background-color: #fff !important;
+    margin: 5px;
+    margin-left: 10px;
+    border-radius: 10px;
+    box-shadow: 9px 8px 5px -4px rgba(0, 0, 0, 0.1);
+    padding: 0;
+    display: grid;
+    position: relative;
+    grid-template-columns: 49px 163px;
+    grid-template-rows: 50px 150px;
+    height: auto;
+}
+
+.eff-comm-box svg {
+    margin-left: -10px;
+}
+
+.tab-revenue-box{
+    height: 100%;
+    width: 100%;
+    z-index: 99;
+    border-bottom-left-radius: 10px;
+    border-top-left-radius: 10px;
+    background-color: #034A7C;
+    position: relative;
+    left: 0;
+    grid-row: span 2;
+    grid-column: 1;
 }
 
 #total-margin {
-    background-color: #fff !important;
-    margin: 5px;
     margin-left: 10px;
     border-radius: 15px;
-    box-shadow: 9px 8px 5px -4px rgba(0, 0, 0, 0.1);
+    margin-top: 0;
+}
+
+.eff-gauge{
+    height: 100px;
+    background-color: transparent;
 }
 
 #eff-commissions-gauge>div>div>div>div {
     color: #000;
+    font-size: 18px;
+    margin-right: 2px;
 }
 
 #eff-commissions-gauge>div>div>div>label {

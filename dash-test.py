@@ -236,9 +236,30 @@ app.layout = dbc.Container(
                     [
                         dbc.Row(
                             [
-                                html.H2(id="total-revenue"),
-                                html.H2(id="total-margin"),
-                                daq.Gauge(
+                                html.Div([
+                                    html.Div(className="tab-revenue-box"),
+                                    html.H2("Expected Revenue", className="total-revenue-title"),
+                                    html.H2(id="total-revenue"),
+                                ],
+                                style={"background-color":"#fff",
+                                        "border-radius":"10px",
+                                },
+                                className="total-revenue-box",
+                                ),
+
+                                html.Div([
+                                    html.Div(className="tab-revenue-box"),
+                                    html.H2("Expected Margin", className="total-revenue-title"),
+                                    html.H2(id="total-margin"),
+                                ],
+                                className="total-revenue-box",
+                                ),
+                                
+                                html.Div([
+                                    html.Div(className="tab-revenue-box"),
+                                    html.H2("Effective commissions", className="total-revenue-title"),
+                                    
+                                    daq.Gauge(
                                     id="eff-commissions-gauge",
                                     color={
                                         "gradient": True,
@@ -249,17 +270,43 @@ app.layout = dbc.Container(
                                         },
                                     },
                                     # value=2,
-                                    label=dict(
-                                        label="Effective commissions",
-                                        style={"font-size": "22px"},
-                                    ),
+                                    # label=dict(
+                                    #     label="Effective commissions",
+                                    #     style={"font-size": "18px"},
+                                    # ),
                                     max=15,
                                     min=0,
                                     showCurrentValue=True,
                                     units="%",
                                     className="eff-gauge",
-                                    size=180,
+                                    size=130,
                                 ),
+                                ],
+                                className="eff-comm-box",
+                                ),
+
+                                # daq.Gauge(
+                                #     id="eff-commissions-gauge",
+                                #     color={
+                                #         "gradient": True,
+                                #         "ranges": {
+                                #             "green": [0, 6],
+                                #             "yellow": [6, 10],
+                                #             "red": [10, 15],
+                                #         },
+                                #     },
+                                #     # value=2,
+                                #     label=dict(
+                                #         label="Effective commissions",
+                                #         style={"font-size": "18px"},
+                                #     ),
+                                #     max=15,
+                                #     min=0,
+                                #     showCurrentValue=True,
+                                #     units="%",
+                                #     className="eff-gauge",
+                                #     size=180,
+                                # ),
                             ]
                         ),
                     ],
@@ -802,8 +849,8 @@ def plot_data(ADR, budget, Ad_start, Booking_markup, df_visits_t_stay, t_stay):
         fig_reservations,
         # fig_CPC,
         commission_percentage,
-        f"Margin: {total_margin:.2f}€",
-        f"Revenue: {total_revenue:.2f}€",
+        f"{total_margin:.2f}€",
+        f"{total_revenue:.2f}€",
     )
 
 
