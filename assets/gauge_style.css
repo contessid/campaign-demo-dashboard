@@ -1,7 +1,18 @@
 body {
     background-color: #dee2e6 !important;
-    font-family: "Source Sans"
+    font-family: "Source Sans 3"
         /* background-color: #efefef !important; */
+}
+
+/* FONTS */
+@font-face {
+    font-family: "Source Sans 3";
+    src: url("/assets/fonts/sourcesans3-1.ttf") format("truetype");
+}
+
+*, h1{
+    font-family: "Source Sans 3";
+    src: url("/assets/fonts/sourcesans3-1.ttf") format("truetype");
 }
 
 #react-entry-point>div>div.controllers.col-12 {
@@ -108,7 +119,20 @@ body {
 .total-revenue-box{
     background-color: #fff !important;
     margin: 5px;
-    margin-left: 10px;
+    margin-top: 15px;
+    margin-left: 20px;
+    border-radius: 10px;
+    box-shadow: 9px 8px 5px -4px rgba(0, 0, 0, 0.1);
+    padding: 0;
+    display: grid;
+    position: relative;
+    grid-template-columns: 49px 163px;
+}
+
+.total-margin-box{
+    background-color: #fff !important;
+    margin: 5px;
+    margin-left: 20px;
     border-radius: 10px;
     box-shadow: 9px 8px 5px -4px rgba(0, 0, 0, 0.1);
     padding: 0;
@@ -120,7 +144,7 @@ body {
 .eff-comm-box{
     background-color: #fff !important;
     margin: 5px;
-    margin-left: 10px;
+    margin-left: 20px;
     border-radius: 10px;
     box-shadow: 9px 8px 5px -4px rgba(0, 0, 0, 0.1);
     padding: 0;

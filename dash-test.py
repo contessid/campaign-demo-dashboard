@@ -41,9 +41,9 @@ app = Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
 app.layout = dbc.Container(
     [
         html.H1(
-            "Demo Campaigns",
+            "DEMO CAMPAIGNS",
             className="mb-2",
-            style={"textAlign": "center", "font-family": "Work Sans"},
+            style={"textAlign": "center"},
         ),
         dbc.Col(
             [
@@ -61,7 +61,7 @@ app.layout = dbc.Container(
                             "textAlign": "center",
                             "margin": "15px",
                             "font-size": "25px",
-                            "font-family": "Work Sans",
+                            "font-family": "Source Sans 3",
                         },
                     )
                 ),
@@ -252,7 +252,7 @@ app.layout = dbc.Container(
                                     html.H2("Expected Margin", className="total-revenue-title"),
                                     html.H2(id="total-margin"),
                                 ],
-                                className="total-revenue-box",
+                                className="total-margin-box",
                                 ),
                                 
                                 html.Div([
@@ -458,8 +458,8 @@ def plot_data(ADR, budget, Ad_start, Booking_markup, df_visits_t_stay, t_stay):
             ticks="outside",
             # griddash="dot",
         ),
-        titlefont=dict(family="Work Sans"),
-        font=dict(family="Work Sans"),
+        titlefont=dict(family="Source Sans 3"),
+        font=dict(family="Source Sans 3"),
         hovermode="x unified",
     )
     cluster = map_t_stay_cluster[t_stay]
