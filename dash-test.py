@@ -486,46 +486,62 @@ def plot_data(ADR, budget, Ad_start, Booking_markup, df_visits_t_stay, t_stay):
     # plot the visits curve
     fig_visits = go.Figure(layout=layout)
     fig_visits.add_trace(
-        go.Scatter(
-            x=np.arange(TODAY_LEAD, 365),
-            y=cum_visits[TODAY_LEAD:],
-            line=dict(color="rgba(1, 99, 155,1)", width=4),
-            fill="tozeroy",
-            fillcolor="rgba(1, 99, 155,1)",
-            text="Visits",
-            hoverinfo="text",
-        )
+    go.Scatter(
+    x=np.arange(TODAY_LEAD, 365),
+    y=cum_visits[TODAY_LEAD:],
+    line=dict(color="rgba(1, 99, 155,1)", width=4),
+    fill="tozeroy",
+    fillcolor="rgba(1, 99, 155,1)",
+    text="Visits",
+    hoverinfo="text",
+    )
     )
     fig_visits.add_trace(
-        go.Scatter(
-            x=np.arange(0, TODAY_LEAD),
-            y=cum_visits[:TODAY_LEAD],
-            line=dict(color="rgba(1, 99, 155,0.7)", width=4),
-            fill="tozeroy",
-            fillcolor="rgba(1, 99, 155,0.7)",
-            text="Visits forecast",
-            hoverinfo="text",
-        )
+    go.Scatter(
+    x=np.arange(Ad_start, TODAY_LEAD + 1),
+    y=cum_visits[Ad_start : TODAY_LEAD + 1],
+    line=dict(color="rgba(1, 99, 155,0.5)", width=4),
+    fill="tozeroy",
+    fillcolor="rgba(1, 99, 155,0.5)",
+    text="Visits forecast",
+    hoverinfo="text",
+    mode="lines",
+    )
     )
     fig_visits.add_trace(
-        go.Scatter(
-            x=np.arange(0, Ad_start + 1),
-            y=cum_visits_with_camp[: Ad_start + 1],
-            line=dict(color="rgba(243, 122, 0,0.7)", width=4),
-            fill="tonexty",
-            fillcolor="rgba(243, 122, 0,0.7)",
-            text="Visits forecast with ads",
-            hoverinfo="text",
-            # fill='tozeroy'
-        )
+    go.Scatter(
+    x=np.arange(0, Ad_start + 1),
+    y=cum_visits[: Ad_start + 1],
+    line=dict(color="rgba(1, 99, 155,0.5)", width=4),
+    fill="tozeroy",
+    fillcolor="rgba(1, 99, 155,0.5)",
+    text="Visits forecast",
+    hoverinfo="text",
+    mode="lines",
+    )
     )
 
+    if budget > 0 and Ad_start > 0:
+        fig_visits.add_trace(
+            go.Scatter(
+            x=np.arange(0, Ad_start + 1),
+            y=cum_visits_with_camp[: Ad_start + 1],
+            line=dict(color="rgba(243, 122, 0,0.5)", width=4),
+            fill="tonexty",
+            fillcolor="rgba(243, 122, 0,0.5)",
+            text="Visits forecast with ads",
+            hoverinfo="text",
+            mode="lines"
+            # fill='tozeroy'
+        )
+        )
+
     fig_visits.update_layout(
-        title="Visits curve",
-        xaxis_title="Lead time [d]",
-        yaxis_title="Cumulative visits",
-        titlefont=dict(size=20),
-        title_x=0.5,
+    title="Visits curve",
+    xaxis_title="Lead time [d]",
+    yaxis_title="Cumulative visits",
+    titlefont=dict(size=20),
+    title_x=0.5,
     )
     xticks = list(np.arange(0, 201, 50))
     xlabels = [str(i) for i in xticks]
@@ -540,34 +556,34 @@ def plot_data(ADR, budget, Ad_start, Booking_markup, df_visits_t_stay, t_stay):
     # plot the visits curve on booking
     fig_booking = go.Figure(layout=layout)
     fig_booking.add_trace(
-        go.Scatter(
-            x=np.arange(TODAY_LEAD, 365),
-            y=cum_visits_booking[TODAY_LEAD:],
-            line=dict(color="rgba(142, 202, 230,1)", width=4),
-            fill="tozeroy",
-            fillcolor="rgba(142, 202, 230,1)",
-            text="Visits on Booking.com",
-            hoverinfo="text",
-        )
+    go.Scatter(
+    x=np.arange(TODAY_LEAD, 365),
+    y=cum_visits_booking[TODAY_LEAD:],
+    line=dict(color="rgba(142, 202, 230,1)", width=4),
+    fill="tozeroy",
+    fillcolor="rgba(142, 202, 230,1)",
+    text="Visits on Booking.com",
+    hoverinfo="text",
+    )
     )
     fig_booking.add_trace(
-        go.Scatter(
-            x=np.arange(0, TODAY_LEAD),
-            y=cum_visits_booking[:TODAY_LEAD],
-            line=dict(color="rgba(142, 202, 230,0.7)", width=4),
-            fill="tozeroy",
-            fillcolor="rgba(142, 202, 230,0.7)",
-            text="Visits forecast on Booking.com",
-            hoverinfo="text",
-        )
+    go.Scatter(
+    x=np.arange(0, TODAY_LEAD + 1),
+    y=cum_visits_booking[: TODAY_LEAD + 1],
+    line=dict(color="rgba(142, 202, 230,0.5)", width=4),
+    fill="tozeroy",
+    fillcolor="rgba(142, 202, 230,0.5)",
+    text="Visits forecast on Booking.com",
+    hoverinfo="text",
+    )
     )
 
     fig_booking.update_layout(
-        title="Visits curve on Booking.com",
-        xaxis_title="Lead time [d]",
-        yaxis_title="Cumulative visits",
-        titlefont=dict(size=20),
-        title_x=0.5,
+    title="Visits curve on Booking.com",
+    xaxis_title="Lead time [d]",
+    yaxis_title="Cumulative visits",
+    titlefont=dict(size=20),
+    title_x=0.5,
     )
 
     fig_booking.update_xaxes(range=[200, 0], tickvals=xticks, ticktext=xlabels)
@@ -685,43 +701,76 @@ def plot_data(ADR, budget, Ad_start, Booking_markup, df_visits_t_stay, t_stay):
     # reservations on direct forecast
     fig_reservations.add_trace(
         go.Scatter(
-            x=advance_vect[:TODAY_LEAD],
-            y=reservations[0, :TODAY_LEAD],
-            line=dict(color="rgba(1, 99, 155,0.7)", width=4),
+            x=advance_vect[Ad_start : TODAY_LEAD + 1],
+            y=reservations[0, Ad_start : TODAY_LEAD + 1],
+            line=dict(color="rgba(1, 99, 155,0.5)", width=4),
             fill="tozeroy",
-            fillcolor="rgba(1, 99, 155,0.7)",
+            fillcolor="rgba(1, 99, 155,0.5)",
             text="Reservations forecast on direct",
             hoverinfo="text",
+            mode="lines",
         )
     )
 
     # reservations on booking + direct forecast
     fig_reservations.add_trace(
         go.Scatter(
-            x=advance_vect[:TODAY_LEAD],
-            y=reservations_booking[0, :TODAY_LEAD] + reservations[0, :TODAY_LEAD],
-            line=dict(color="rgba(142, 202, 230,0.7)", width=4),
+            x=advance_vect[Ad_start : TODAY_LEAD + 1],
+            y=reservations_booking[0, Ad_start : TODAY_LEAD + 1]
+            + reservations[0, Ad_start : TODAY_LEAD + 1],
+            line=dict(color="rgba(142, 202, 230,0.5)", width=4),
             fill="tonexty",
-            fillcolor="rgba(142, 202, 230,0.7)",
+            fillcolor="rgba(142, 202, 230,0.5)",
             text="Reservations forecast on Booking.com",
             hoverinfo="text",
+            mode="lines",
+        )
+    )
+
+    # reservations on direct forecast
+    fig_reservations.add_trace(
+        go.Scatter(
+            x=advance_vect[: Ad_start + 1],
+            y=reservations[0, : Ad_start + 1],
+            line=dict(color="rgba(1, 99, 155,0.5)", width=4),
+            fill="tozeroy",
+            fillcolor="rgba(1, 99, 155,0.5)",
+            text="Reservations forecast on direct",
+            hoverinfo="text",
+            mode="lines",
+        )
+    )
+
+    # reservations on booking + direct forecast
+    fig_reservations.add_trace(
+        go.Scatter(
+            x=advance_vect[: Ad_start + 1],
+            y=reservations_booking[0, : Ad_start + 1] + reservations[0, : Ad_start + 1],
+            line=dict(color="rgba(142, 202, 230,0.5)", width=4),
+            fill="tonexty",
+            fillcolor="rgba(142, 202, 230,0.5)",
+            text="Reservations forecast on Booking.com",
+            hoverinfo="text",
+            mode="lines",
         )
     )
 
     # reservations on booking plus direct forecast with ads
-    fig_reservations.add_trace(
-        go.Scatter(
-            x=advance_vect[:Ad_start],
-            y=reservations_campaign[0, :Ad_start]
-            + reservations[0, :Ad_start]
-            + reservations_booking[0, :Ad_start],
-            line=dict(color="rgba(243, 122, 0,0.7)", width=4),
-            fill="tonexty",
-            fillcolor="rgba(243, 122, 0,0.7)",
-            text="Reservations forecast with ads",
-            hoverinfo="text",
+    if budget > 0 and Ad_start > 0:
+        fig_reservations.add_trace(
+            go.Scatter(
+                x=advance_vect[: Ad_start + 1],
+                y=reservations_campaign[0, : Ad_start + 1]
+                + reservations[0, : Ad_start + 1]
+                + reservations_booking[0, : Ad_start + 1],
+                line=dict(color="rgba(243, 122, 0,0.5)", width=4),
+                fill="tonexty",
+                fillcolor="rgba(243, 122, 0,0.5)",
+                text="Reservations forecast with ads",
+                hoverinfo="text",
+                mode="lines",
+            )
         )
-    )
     fig_reservations.update_layout(
         title="Reservations curve",
         xaxis_title="Lead time [d]",
@@ -754,6 +803,7 @@ def plot_data(ADR, budget, Ad_start, Booking_markup, df_visits_t_stay, t_stay):
             fillcolor="rgba(1, 99, 155,1)",
             text="Margin direct",
             hoverinfo="text",
+            mode="lines",
         )
     )
     # margin on booking plus direct up to today
@@ -766,50 +816,84 @@ def plot_data(ADR, budget, Ad_start, Booking_markup, df_visits_t_stay, t_stay):
             fillcolor="rgba(142, 202, 230,1)",
             text="Margin on Booking.com",
             hoverinfo="text",
+            mode="lines",
         )
     )
 
     # forecasting on direct
     fig_margin.add_trace(
         go.Scatter(
-            x=advance_vect[:TODAY_LEAD],
-            y=direct_revenue[0, :TODAY_LEAD],
-            line=dict(color="rgba(1, 99, 155,0.7)", width=4),
+            x=advance_vect[Ad_start : TODAY_LEAD + 1],
+            y=direct_revenue[0, Ad_start : TODAY_LEAD + 1],
+            line=dict(color="rgba(1, 99, 155,0.5)", width=4),
             fill="tozeroy",
-            fillcolor="rgba(1, 99, 155,0.7)",
+            fillcolor="rgba(1, 99, 155,0.5)",
             text="Margin forecast direct",
             hoverinfo="text",
+            mode="lines",
         )
     )
 
     # forecasting on direct plus booking
     fig_margin.add_trace(
         go.Scatter(
-            x=advance_vect[:TODAY_LEAD],
-            y=margin_booking[0, :TODAY_LEAD] + direct_revenue[0, :TODAY_LEAD],
-            line=dict(color="rgba(142, 202, 230,0.7)", width=4),
+            x=advance_vect[Ad_start : TODAY_LEAD + 1],
+            y=margin_booking[0, Ad_start : TODAY_LEAD + 1]
+            + direct_revenue[0, Ad_start : TODAY_LEAD + 1],
+            line=dict(color="rgba(142, 202, 230,0.5)", width=4),
             fill="tonexty",
-            fillcolor="rgba(142, 202, 230,0.7)",
+            fillcolor="rgba(142, 202, 230,0.5)",
             text="Margin forecast Booking.com",
             hoverinfo="text",
+            mode="lines",
+        )
+    )
+
+    # forecasting on direct
+    fig_margin.add_trace(
+        go.Scatter(
+            x=advance_vect[: Ad_start + 1],
+            y=direct_revenue[0, : Ad_start + 1],
+            line=dict(color="rgba(1, 99, 155,0.5)", width=4),
+            fill="tozeroy",
+            fillcolor="rgba(1, 99, 155,0.5)",
+            text="Margin forecast direct",
+            hoverinfo="text",
+            mode="lines",
+        )
+    )
+
+    # forecasting on direct plus booking
+    fig_margin.add_trace(
+        go.Scatter(
+            x=advance_vect[: Ad_start + 1],
+            y=margin_booking[0, : Ad_start + 1] + direct_revenue[0, : Ad_start + 1],
+            line=dict(color="rgba(142, 202, 230,0.5)", width=4),
+            fill="tonexty",
+            fillcolor="rgba(142, 202, 230,0.5)",
+            text="Margin forecast Booking.com",
+            hoverinfo="text",
+            mode="lines",
         )
     )
 
     # forecasting on direct plus booking plus ads
-    fig_margin.add_trace(
-        go.Scatter(
-            x=advance_vect[:Ad_start],
-            y=reservations_campaign[0, :Ad_start] * ADR
-            + margin_booking[0, :Ad_start]
-            + direct_revenue[0, :Ad_start]
-            - CPC * vis * np.arange(Ad_start + 1, 1, -1),
-            line=dict(color="rgba(243, 122, 0,0.7)", width=4),
-            fill="tonexty",
-            fillcolor="rgba(243, 122, 0,0.7)",
-            text="Margin forecast of ads",
-            hoverinfo="text",
+    if budget > 0 and Ad_start > 0:
+        fig_margin.add_trace(
+            go.Scatter(
+                x=advance_vect[:Ad_start],
+                y=reservations_campaign[0, :Ad_start] * ADR
+                + margin_booking[0, :Ad_start]
+                + direct_revenue[0, :Ad_start]
+                - CPC * vis * np.arange(Ad_start + 1, 1, -1),
+                line=dict(color="rgba(243, 122, 0,0.5)", width=4),
+                fill="tonexty",
+                fillcolor="rgba(243, 122, 0,0.5)",
+                text="Margin forecast of ads",
+                hoverinfo="text",
+                mode="lines",
+            )
         )
-    )
     fig_margin.update_layout(
         title="Margin curve",
         xaxis_title="Lead time [d]",

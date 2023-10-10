@@ -106,6 +106,10 @@ body {
     box-shadow: 9px 8px 5px -4px rgba(0, 0, 0, 0.1);
 }
 
+#t_stay label input{
+    margin-right: 5px;
+}
+
 #eff-commissions-gauge {
     margin: 5px;
     margin-left: 20px;
