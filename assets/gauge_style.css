@@ -4,7 +4,7 @@ body {
         /* background-color: #efefef !important; */
 }
 
-#react-entry-point>div>div.controllers.col {
+#react-entry-point>div>div.controllers.col-12 {
     background-color: #fff !important;
     border-radius: 15px;
     box-shadow: 9px 8px 5px -4px rgba(0, 0, 0, 0.1);
@@ -41,7 +41,7 @@ body {
 }
 
 #plot5-booking>div.js-plotly-plot>div>div {
-    margin: 5px;
+    margin: 10px;
 }
 
 #plot5-booking>div.js-plotly-plot>div>div>svg:nth-child(1) {
@@ -52,7 +52,7 @@ body {
 
 #plot4-reservations>div.js-plotly-plot>div>div {
     /* background-color: #fff !important; */
-    margin-left: 5px;
+    margin-left: 10px;
 }
 
 #plot4-reservations>div.js-plotly-plot>div>div>svg:nth-child(1) {
@@ -88,7 +88,7 @@ body {
 #eff-commissions-gauge {
     background-color: #fff !important;
     margin: 5px;
-    margin-left: 10px;
+    margin-left: 20px;
     border-radius: 15px;
     box-shadow: 9px 8px 5px -4px rgba(0, 0, 0, 0.1);
 }
@@ -96,7 +96,8 @@ body {
 #total-revenue {
     background-color: #fff !important;
     margin: 5px;
-    margin-left: 10px;
+    margin-left: 20px;
+    margin-top: 10px;
     border-radius: 15px;
     box-shadow: 9px 8px 5px -4px rgba(0, 0, 0, 0.1);
 }
@@ -104,7 +105,7 @@ body {
 #total-margin {
     background-color: #fff !important;
     margin: 5px;
-    margin-left: 10px;
+    margin-left: 20px;
     border-radius: 15px;
     box-shadow: 9px 8px 5px -4px rgba(0, 0, 0, 0.1);
 }
@@ -141,6 +142,12 @@ body {
 
 #Booking_markup {
     padding: 30px !important;
+}
+
+.col-12 {
+    margin-left: -10px;
+    margin-right: -30px;
+    width: auto;
 }
 
 /* .row>* {

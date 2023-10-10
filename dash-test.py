@@ -43,7 +43,7 @@ app.layout = dbc.Container(
         html.H1(
             "Demo Campaigns",
             className="mb-2",
-            style={"textAlign": "center", "font-family": "Source Sans"},
+            style={"textAlign": "center", "font-family": "Work Sans"},
         ),
         dbc.Col(
             [
@@ -61,7 +61,7 @@ app.layout = dbc.Container(
                             "textAlign": "center",
                             "margin": "15px",
                             "font-size": "25px",
-                            "font-family": "Source Sans",
+                            "font-family": "Work Sans",
                         },
                     )
                 ),
@@ -411,8 +411,8 @@ def plot_data(ADR, budget, Ad_start, Booking_markup, df_visits_t_stay, t_stay):
             ticks="outside",
             # griddash="dot",
         ),
-        titlefont=dict(family="Source Sans"),
-        font=dict(family="Source Sans"),
+        titlefont=dict(family="Work Sans"),
+        font=dict(family="Work Sans"),
         hovermode="x unified",
     )
     cluster = map_t_stay_cluster[t_stay]
