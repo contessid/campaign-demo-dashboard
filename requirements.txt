@@ -8,4 +8,7 @@ dash-ag-grid
 dash-bootstrap-components 
 dash-core-components 
 dash-daq 
-dash-html-components 
+dash-html-components
+flask 
+gunicorn
+

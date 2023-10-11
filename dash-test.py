@@ -1,10 +1,8 @@
-import base64
 import datetime
-from io import BytesIO
 
-import dash_ag_grid as dag
 import dash_bootstrap_components as dbc  # pip install dash-bootstrap-components
 import dash_daq as daq
+import flask
 import numpy as np
 import pandas as pd  # pip install pandas
 import plotly.express as px
@@ -34,8 +32,9 @@ GAUGE_SIZE = 130
 GAUGE_SIZE_RESPONSIVE = 100
 
 # df = pd.read_csv("https://raw.githubusercontent.com/plotly/datasets/master/solar.csv")
+app_server = flask.Flask(__name__)  # define flask app.server
+app = Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP], server=app_server)
 
-app = Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
 app.layout = dbc.Container(
     [
         html.H1(
