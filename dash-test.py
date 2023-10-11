@@ -1,9 +1,10 @@
+import base64
 import datetime
+from io import BytesIO
 
 import dash_ag_grid as dag
 import dash_bootstrap_components as dbc  # pip install dash-bootstrap-components
 import dash_daq as daq
-import matplotlib  # pip install matplotlib
 import numpy as np
 import pandas as pd  # pip install pandas
 import plotly.express as px
@@ -24,12 +25,6 @@ from margin_optimization import (
     compset_cutoff_booking,
     cpc_from_budget,
 )
-
-matplotlib.use("agg")
-import base64
-from io import BytesIO
-
-import matplotlib.pyplot as plt
 
 TODAY_LEAD = 75
 BOOKING_MULTIPLIER = 1.25
@@ -239,55 +234,64 @@ app.layout = dbc.Container(
                     [
                         dbc.Row(
                             [
-                                html.Div([
-                                    html.Div(className="tab-revenue-box"),
-                                    html.H2("Expected Revenue", className="total-revenue-title"),
-                                    html.H2(id="total-revenue"),
-                                ],
-                                style={"background-color":"#fff",
-                                        "border-radius":"10px",
-                                },
-                                className="total-revenue-box",
-                                ),
-
-                                html.Div([
-                                    html.Div(className="tab-margin-box"),
-                                    html.H2("Expected Margin", className="total-margin-title"),
-                                    html.H2(id="total-margin"),
-                                ],
-                                className="total-margin-box",
-                                ),
-                                
-                                html.Div([
-                                    html.Div(className="tab-comm-box"),
-                                    html.H2("Effective commissions", className="eff-comm-title"),
-                                    
-                                    daq.Gauge(
-                                    id="eff-commissions-gauge",
-                                    color={
-                                        "gradient": True,
-                                        "ranges": {
-                                            "green": [0, 6],
-                                            "yellow": [6, 10],
-                                            "red": [10, 15],
-                                        },
+                                html.Div(
+                                    [
+                                        html.Div(className="tab-revenue-box"),
+                                        html.H2(
+                                            "Expected Revenue",
+                                            className="total-revenue-title",
+                                        ),
+                                        html.H2(id="total-revenue"),
+                                    ],
+                                    style={
+                                        "background-color": "#fff",
+                                        "border-radius": "10px",
                                     },
-                                    # value=2,
-                                    # label=dict(
-                                    #     label="Effective commissions",
-                                    #     style={"font-size": "18px"},
-                                    # ),
-                                    max=15,
-                                    min=0,
-                                    showCurrentValue=True,
-                                    units="%",
-                                    className="eff-gauge",
-                                    size= GAUGE_SIZE,
+                                    className="total-revenue-box",
                                 ),
-                                ],
-                                className="eff-comm-box",
+                                html.Div(
+                                    [
+                                        html.Div(className="tab-margin-box"),
+                                        html.H2(
+                                            "Expected Margin",
+                                            className="total-margin-title",
+                                        ),
+                                        html.H2(id="total-margin"),
+                                    ],
+                                    className="total-margin-box",
                                 ),
-
+                                html.Div(
+                                    [
+                                        html.Div(className="tab-comm-box"),
+                                        html.H2(
+                                            "Effective commissions",
+                                            className="eff-comm-title",
+                                        ),
+                                        daq.Gauge(
+                                            id="eff-commissions-gauge",
+                                            color={
+                                                "gradient": True,
+                                                "ranges": {
+                                                    "green": [0, 6],
+                                                    "yellow": [6, 10],
+                                                    "red": [10, 15],
+                                                },
+                                            },
+                                            # value=2,
+                                            # label=dict(
+                                            #     label="Effective commissions",
+                                            #     style={"font-size": "18px"},
+                                            # ),
+                                            max=15,
+                                            min=0,
+                                            showCurrentValue=True,
+                                            units="%",
+                                            className="eff-gauge",
+                                            size=GAUGE_SIZE,
+                                        ),
+                                    ],
+                                    className="eff-comm-box",
+                                ),
                                 # daq.Gauge(
                                 #     id="eff-commissions-gauge",
                                 #     color={
@@ -486,62 +490,62 @@ def plot_data(ADR, budget, Ad_start, Booking_markup, df_visits_t_stay, t_stay):
     # plot the visits curve
     fig_visits = go.Figure(layout=layout)
     fig_visits.add_trace(
-    go.Scatter(
-    x=np.arange(TODAY_LEAD, 365),
-    y=cum_visits[TODAY_LEAD:],
-    line=dict(color="rgba(1, 99, 155,1)", width=4),
-    fill="tozeroy",
-    fillcolor="rgba(1, 99, 155,1)",
-    text="Visits",
-    hoverinfo="text",
-    )
-    )
-    fig_visits.add_trace(
-    go.Scatter(
-    x=np.arange(Ad_start, TODAY_LEAD + 1),
-    y=cum_visits[Ad_start : TODAY_LEAD + 1],
-    line=dict(color="rgba(1, 99, 155,0.5)", width=4),
-    fill="tozeroy",
-    fillcolor="rgba(1, 99, 155,0.5)",
-    text="Visits forecast",
-    hoverinfo="text",
-    mode="lines",
-    )
+        go.Scatter(
+            x=np.arange(TODAY_LEAD, 365),
+            y=cum_visits[TODAY_LEAD:],
+            line=dict(color="rgba(1, 99, 155,1)", width=4),
+            fill="tozeroy",
+            fillcolor="rgba(1, 99, 155,1)",
+            text="Visits",
+            hoverinfo="text",
+        )
     )
     fig_visits.add_trace(
-    go.Scatter(
-    x=np.arange(0, Ad_start + 1),
-    y=cum_visits[: Ad_start + 1],
-    line=dict(color="rgba(1, 99, 155,0.5)", width=4),
-    fill="tozeroy",
-    fillcolor="rgba(1, 99, 155,0.5)",
-    text="Visits forecast",
-    hoverinfo="text",
-    mode="lines",
+        go.Scatter(
+            x=np.arange(Ad_start, TODAY_LEAD + 1),
+            y=cum_visits[Ad_start : TODAY_LEAD + 1],
+            line=dict(color="rgba(1, 99, 155,0.5)", width=4),
+            fill="tozeroy",
+            fillcolor="rgba(1, 99, 155,0.5)",
+            text="Visits forecast",
+            hoverinfo="text",
+            mode="lines",
+        )
     )
+    fig_visits.add_trace(
+        go.Scatter(
+            x=np.arange(0, Ad_start + 1),
+            y=cum_visits[: Ad_start + 1],
+            line=dict(color="rgba(1, 99, 155,0.5)", width=4),
+            fill="tozeroy",
+            fillcolor="rgba(1, 99, 155,0.5)",
+            text="Visits forecast",
+            hoverinfo="text",
+            mode="lines",
+        )
     )
 
     if budget > 0 and Ad_start > 0:
         fig_visits.add_trace(
             go.Scatter(
-            x=np.arange(0, Ad_start + 1),
-            y=cum_visits_with_camp[: Ad_start + 1],
-            line=dict(color="rgba(243, 122, 0,0.5)", width=4),
-            fill="tonexty",
-            fillcolor="rgba(243, 122, 0,0.5)",
-            text="Visits forecast with ads",
-            hoverinfo="text",
-            mode="lines"
-            # fill='tozeroy'
-        )
+                x=np.arange(0, Ad_start + 1),
+                y=cum_visits_with_camp[: Ad_start + 1],
+                line=dict(color="rgba(243, 122, 0,0.5)", width=4),
+                fill="tonexty",
+                fillcolor="rgba(243, 122, 0,0.5)",
+                text="Visits forecast with ads",
+                hoverinfo="text",
+                mode="lines"
+                # fill='tozeroy'
+            )
         )
 
     fig_visits.update_layout(
-    title="Visits curve",
-    xaxis_title="Lead time [d]",
-    yaxis_title="Cumulative visits",
-    titlefont=dict(size=20),
-    title_x=0.5,
+        title="Visits curve",
+        xaxis_title="Lead time [d]",
+        yaxis_title="Cumulative visits",
+        titlefont=dict(size=20),
+        title_x=0.5,
     )
     xticks = list(np.arange(0, 201, 50))
     xlabels = [str(i) for i in xticks]
@@ -556,34 +560,34 @@ def plot_data(ADR, budget, Ad_start, Booking_markup, df_visits_t_stay, t_stay):
     # plot the visits curve on booking
     fig_booking = go.Figure(layout=layout)
     fig_booking.add_trace(
-    go.Scatter(
-    x=np.arange(TODAY_LEAD, 365),
-    y=cum_visits_booking[TODAY_LEAD:],
-    line=dict(color="rgba(142, 202, 230,1)", width=4),
-    fill="tozeroy",
-    fillcolor="rgba(142, 202, 230,1)",
-    text="Visits on Booking.com",
-    hoverinfo="text",
-    )
+        go.Scatter(
+            x=np.arange(TODAY_LEAD, 365),
+            y=cum_visits_booking[TODAY_LEAD:],
+            line=dict(color="rgba(142, 202, 230,1)", width=4),
+            fill="tozeroy",
+            fillcolor="rgba(142, 202, 230,1)",
+            text="Visits on Booking.com",
+            hoverinfo="text",
+        )
     )
     fig_booking.add_trace(
-    go.Scatter(
-    x=np.arange(0, TODAY_LEAD + 1),
-    y=cum_visits_booking[: TODAY_LEAD + 1],
-    line=dict(color="rgba(142, 202, 230,0.5)", width=4),
-    fill="tozeroy",
-    fillcolor="rgba(142, 202, 230,0.5)",
-    text="Visits forecast on Booking.com",
-    hoverinfo="text",
-    )
+        go.Scatter(
+            x=np.arange(0, TODAY_LEAD + 1),
+            y=cum_visits_booking[: TODAY_LEAD + 1],
+            line=dict(color="rgba(142, 202, 230,0.5)", width=4),
+            fill="tozeroy",
+            fillcolor="rgba(142, 202, 230,0.5)",
+            text="Visits forecast on Booking.com",
+            hoverinfo="text",
+        )
     )
 
     fig_booking.update_layout(
-    title="Visits curve on Booking.com",
-    xaxis_title="Lead time [d]",
-    yaxis_title="Cumulative visits",
-    titlefont=dict(size=20),
-    title_x=0.5,
+        title="Visits curve on Booking.com",
+        xaxis_title="Lead time [d]",
+        yaxis_title="Cumulative visits",
+        titlefont=dict(size=20),
+        title_x=0.5,
     )
 
     fig_booking.update_xaxes(range=[200, 0], tickvals=xticks, ticktext=xlabels)
