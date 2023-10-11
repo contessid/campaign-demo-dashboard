@@ -100,9 +100,7 @@ def logistic_fit(X, y):
 
     # instantiate the model (using the default parameters)
     # logreg = LogisticRegression(random_state=16, max_iter=1000,penalty='l1', solver='liblinear',tol=1e-8)
-    logreg = LogisticRegression(
-        random_state=16, max_iter=1000, penalty="l2", solver="newton-cholesky", tol=1e-8
-    )
+    logreg = LogisticRegression(random_state=16, max_iter=1000, penalty="l2", tol=1e-8)
 
     # fit the model with data
     logreg.fit(X_train, y_train)
