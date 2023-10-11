@@ -1,0 +1,11 @@
+numpy 
+pandas 
+plotly 
+scikit-learn
+dash 
+dash-table 
+dash-ag-grid 
+dash-bootstrap-components 
+dash-core-components 
+dash-daq 
+dash-html-components 
