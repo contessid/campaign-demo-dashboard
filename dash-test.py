@@ -139,7 +139,7 @@ app.layout = dbc.Container(
                         dbc.Col(
                             [
                                 html.H3(
-                                    "Booking.com markup",
+                                    "OTA markup",
                                     className="mb-2",
                                     style={"textAlign": "center"},
                                 ),
@@ -179,7 +179,7 @@ app.layout = dbc.Container(
                                 dbc.Col(
                                     [
                                         dcc.Graph(
-                                            id="plot1-visits",
+                                            id="plot3-margin",
                                             figure={},
                                         )
                                     ],
@@ -190,7 +190,7 @@ app.layout = dbc.Container(
                                 dbc.Col(
                                     [
                                         dcc.Graph(
-                                            id="plot5-booking",
+                                            id="plot4-reservations",
                                             figure={},
                                         )
                                     ],
@@ -205,7 +205,7 @@ app.layout = dbc.Container(
                                 dbc.Col(
                                     [
                                         dcc.Graph(
-                                            id="plot3-margin",
+                                            id="plot1-visits",
                                             figure={},
                                         )
                                     ],
@@ -216,7 +216,7 @@ app.layout = dbc.Container(
                                 dbc.Col(
                                     [
                                         dcc.Graph(
-                                            id="plot4-reservations",
+                                            id="plot5-booking",
                                             figure={},
                                         )
                                     ],
@@ -565,7 +565,7 @@ def plot_data(ADR, budget, Ad_start, Booking_markup, df_visits_t_stay, t_stay):
             line=dict(color="rgba(142, 202, 230,1)", width=4),
             fill="tozeroy",
             fillcolor="rgba(142, 202, 230,1)",
-            text="Visits on Booking.com",
+            text="Visits on OTA",
             hoverinfo="text",
         )
     )
@@ -576,13 +576,13 @@ def plot_data(ADR, budget, Ad_start, Booking_markup, df_visits_t_stay, t_stay):
             line=dict(color="rgba(142, 202, 230,0.5)", width=4),
             fill="tozeroy",
             fillcolor="rgba(142, 202, 230,0.5)",
-            text="Visits forecast on Booking.com",
+            text="Visits forecast on OTA",
             hoverinfo="text",
         )
     )
 
     fig_booking.update_layout(
-        title="Visits curve on Booking.com",
+        title="Visits curve on OTA",
         xaxis_title="Lead time [d]",
         yaxis_title="Cumulative visits",
         titlefont=dict(size=20),
@@ -697,7 +697,7 @@ def plot_data(ADR, budget, Ad_start, Booking_markup, df_visits_t_stay, t_stay):
             line=dict(color="rgba(142, 202, 230,1)", width=4),
             fill="tonexty",
             fillcolor="rgba(142, 202, 230,1)",
-            text="Reservations on Booking.com",
+            text="Reservations from OTA",
             hoverinfo="text",
         )
     )
@@ -724,7 +724,7 @@ def plot_data(ADR, budget, Ad_start, Booking_markup, df_visits_t_stay, t_stay):
             line=dict(color="rgba(142, 202, 230,0.5)", width=4),
             fill="tonexty",
             fillcolor="rgba(142, 202, 230,0.5)",
-            text="Reservations forecast on Booking.com",
+            text="Reservations forecast from OTA",
             hoverinfo="text",
             mode="lines",
         )
@@ -752,7 +752,7 @@ def plot_data(ADR, budget, Ad_start, Booking_markup, df_visits_t_stay, t_stay):
             line=dict(color="rgba(142, 202, 230,0.5)", width=4),
             fill="tonexty",
             fillcolor="rgba(142, 202, 230,0.5)",
-            text="Reservations forecast on Booking.com",
+            text="Reservations forecast from OTA",
             hoverinfo="text",
             mode="lines",
         )
@@ -817,7 +817,7 @@ def plot_data(ADR, budget, Ad_start, Booking_markup, df_visits_t_stay, t_stay):
             line=dict(color="rgba(142, 202, 230,1)", width=4),
             fill="tonexty",
             fillcolor="rgba(142, 202, 230,1)",
-            text="Margin on Booking.com",
+            text="Margin from OTA",
             hoverinfo="text",
             mode="lines",
         )
@@ -846,7 +846,7 @@ def plot_data(ADR, budget, Ad_start, Booking_markup, df_visits_t_stay, t_stay):
             line=dict(color="rgba(142, 202, 230,0.5)", width=4),
             fill="tonexty",
             fillcolor="rgba(142, 202, 230,0.5)",
-            text="Margin forecast Booking.com",
+            text="Margin forecast from OTA",
             hoverinfo="text",
             mode="lines",
         )
@@ -874,7 +874,7 @@ def plot_data(ADR, budget, Ad_start, Booking_markup, df_visits_t_stay, t_stay):
             line=dict(color="rgba(142, 202, 230,0.5)", width=4),
             fill="tonexty",
             fillcolor="rgba(142, 202, 230,0.5)",
-            text="Margin forecast Booking.com",
+            text="Margin forecast from OTA",
             hoverinfo="text",
             mode="lines",
         )

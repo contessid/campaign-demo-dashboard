@@ -10,13 +10,14 @@ body {
     src: url("/assets/fonts/sourcesans3-1.ttf") format("truetype");
 }
 
-*, h1{
+*,
+h1 {
     font-family: "Source Sans 3";
     src: url("/assets/fonts/sourcesans3-1.ttf") format("truetype");
 }
 
 /* COLORS */
-:root{
+:root {
     --blue-light: #008FD5;
     --blue-mid: #034A7C;
     --blue-dark: #012D51;
@@ -62,7 +63,7 @@ body {
 }
 
 #plot5-booking>div.js-plotly-plot>div>div {
-    margin: 10px;
+    margin-left: 10px;
 }
 
 #plot5-booking>div.js-plotly-plot>div>div>svg:nth-child(1) {
@@ -73,7 +74,7 @@ body {
 
 #plot4-reservations>div.js-plotly-plot>div>div {
     /* background-color: #fff !important; */
-    margin-left: 10px;
+    margin: 10px;
 }
 
 #plot4-reservations>div.js-plotly-plot>div>div>svg:nth-child(1) {
@@ -106,7 +107,7 @@ body {
     box-shadow: 9px 8px 5px -4px rgba(0, 0, 0, 0.1);
 }
 
-#t_stay label input{
+#t_stay label input {
     margin-right: 5px;
 }
 
@@ -116,7 +117,7 @@ body {
     border-radius: 15px;
 }
 
-.total-revenue-title{
+.total-revenue-title {
     grid-area: 1/2;
     margin-left: 10px;
     margin-bottom: 0px;
@@ -125,7 +126,7 @@ body {
     color: var(--blue-light);
 }
 
-.total-margin-title{
+.total-margin-title {
     grid-area: 1/2;
     margin-left: 10px;
     margin-bottom: 0px;
@@ -134,7 +135,7 @@ body {
     color: var(--blue-mid);
 }
 
-.eff-comm-title{
+.eff-comm-title {
     grid-area: 1/2;
     margin-left: 10px;
     margin-bottom: 0px;
@@ -143,12 +144,12 @@ body {
     color: var(--blue-dark);
 }
 
-#total-revenue{
+#total-revenue {
     grid-area: 2/2;
     margin-left: 10px;
 }
 
-.total-revenue-box{
+.total-revenue-box {
     background-color: #fff !important;
     margin: 5px;
     margin-top: 15px;
@@ -161,7 +162,7 @@ body {
     grid-template-columns: 15px 163px;
 }
 
-.total-margin-box{
+.total-margin-box {
     background-color: #fff !important;
     margin: 5px;
     margin-left: 20px;
@@ -173,7 +174,7 @@ body {
     grid-template-columns: 15px 163px;
 }
 
-.eff-comm-box{
+.eff-comm-box {
     background-color: #fff !important;
     margin: 5px;
     margin-left: 20px;
@@ -191,7 +192,7 @@ body {
     margin-left: -10px;
 }
 
-.tab-revenue-box{
+.tab-revenue-box {
     height: 100%;
     width: 100%;
     z-index: 99;
@@ -204,7 +205,7 @@ body {
     grid-column: 1;
 }
 
-.tab-margin-box{
+.tab-margin-box {
     height: 100%;
     width: 100%;
     z-index: 99;
@@ -214,10 +215,10 @@ body {
     position: relative;
     left: 0;
     grid-row: span 2;
-    grid-column: 1; 
+    grid-column: 1;
 }
 
-.tab-comm-box{
+.tab-comm-box {
     height: 100%;
     width: 100%;
     z-index: 99;
@@ -227,7 +228,7 @@ body {
     position: relative;
     left: 0;
     grid-row: span 2;
-    grid-column: 1; 
+    grid-column: 1;
 }
 
 #total-margin {
@@ -236,7 +237,7 @@ body {
     margin-top: 0;
 }
 
-.eff-gauge{
+.eff-gauge {
     height: 100px;
     background-color: transparent;
 }
@@ -295,25 +296,34 @@ body {
 }
 
 @media screen and (max-width: 1199px) {
-    .total-revenue-title{
+    .total-revenue-title {
         font-size: 13px;
     }
-    .total-margin-title{
+
+    .total-margin-title {
         font-size: 13px;
     }
-    .eff-comm-title{
+
+    .eff-comm-title {
         font-size: 13px;
     }
-    h2, h3, .h2, .h3 {
-    font-size: 13px;
+
+    h2,
+    h3,
+    .h2,
+    .h3 {
+        font-size: 13px;
     }
+
     .eff-comm-box svg {
         margin-left: -28px;
         scale: 0.9;
     }
+
     #eff-commissions-gauge>div>div>div>div {
         margin-right: 30px;
     }
+
     #eff-commissions-gauge>div>div>div>label {
         color: #000;
         font-size: 14px;
